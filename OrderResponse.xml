@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:OrderResponse xmlns:tns="http://www.open.ac.uk/dpb285/Schema/OrderDocuments" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.open.ac.uk/dpb285/Schema/OrderDocuments OrderDocuments.xsd ">
+  <tns:SalesReferenceNumber>9F09775B-DC6E-439F-82D1-7CCAC7F4E3B3</tns:SalesReferenceNumber>
+  <tns:OrderReferenceNumber>6E09886B-DC6E-439F-82D1-7CCAC7F4E3B3</tns:OrderReferenceNumber>
+  <tns:IssuedDate>2012-08-08</tns:IssuedDate>
+  <tns:AcceptedIndicator>true</tns:AcceptedIndicator>
+  <tns:BuyerParty>
+    <tns:CompanyID>1234567890123</tns:CompanyID>
+    <tns:RegisteredName>XYZ MicroTurbines</tns:RegisteredName>
+    <tns:Address>
+      <tns:BuildingName>Ashville House</tns:BuildingName>
+      <tns:BuildingNumber>21</tns:BuildingNumber>
+      <tns:StreetName>Rolvenden Grove</tns:StreetName>
+      <tns:SubDivision>Kents Hill</tns:SubDivision>
+      <tns:CityName>Milton Keynes</tns:CityName>
+      <tns:PostalCode>MK7 6HZ</tns:PostalCode>
+      <tns:Country>GB</tns:Country>
+    </tns:Address>
+    <tns:PurchaseContact>
+      <tns:Name>Joseph Roberts</tns:Name>
+      <tns:Telephone>01908 500123</tns:Telephone>
+      <tns:Telefax>01908 500124</tns:Telefax>
+      <tns:ElectronicMail>jroberts@xyzmicroturbines.co.uk</tns:ElectronicMail>
+    </tns:PurchaseContact>
+    <tns:AccountsContact>
+      <tns:Name>George Baltazar</tns:Name>
+      <tns:Telephone>01908 500125</tns:Telephone>
+      <tns:Telefax>01908 500126</tns:Telefax>
+      <tns:ElectronicMail>gbaltazar@xyzmicroturbines.co.uk</tns:ElectronicMail>
+    </tns:AccountsContact>
+    <tns:SalesContact>
+      <tns:Name>Tony Gomez</tns:Name>
+      <tns:Telephone>01908 500127</tns:Telephone>
+      <tns:Telefax>01908 500128</tns:Telefax>
+      <tns:ElectronicMail>tgomez@xyzmicroturbines.co.uk</tns:ElectronicMail>
+    </tns:SalesContact>
+    <tns:OrderContact>
+      <tns:Name>Erasto Moyo</tns:Name>
+      <tns:Telephone>01908 500129</tns:Telephone>
+      <tns:Telefax>01908 500130</tns:Telefax>
+      <tns:ElectronicMail>emoyo@xyzmicroturbines.co.uk</tns:ElectronicMail>
+    </tns:OrderContact>
+  </tns:BuyerParty>
+  <tns:SupplierParty>
+    <tns:CompanyID>2345678901234</tns:CompanyID>
+    <tns:RegisteredName>CRISPS Company Limited</tns:RegisteredName>
+    <tns:Address>
+      <tns:BuildingName>Mayfair House</tns:BuildingName>
+      <tns:BuildingNumber>161</tns:BuildingNumber>
+      <tns:StreetName>North Ninth Street</tns:StreetName>
+      <tns:SubDivision>Central Milton Keynes</tns:SubDivision>
+      <tns:CityName>Milton Keynes</tns:CityName>
+      <tns:PostalCode>MK9 3AW</tns:PostalCode>
+      <tns:Country>GB</tns:Country>
+    </tns:Address>
+    <tns:PurchaseContact>
+      <tns:Name>Richard Harrison</tns:Name>
+      <tns:Telephone>01908 500212</tns:Telephone>
+      <tns:Telefax>01908 500213</tns:Telefax>
+      <tns:ElectronicMail>rharrison@crisps.co.uk</tns:ElectronicMail>
+    </tns:PurchaseContact>
+    <tns:AccountsContact>
+      <tns:Name>James Moody</tns:Name>
+      <tns:Telephone>01908 500214</tns:Telephone>
+      <tns:Telefax>01908 500215</tns:Telefax>
+      <tns:ElectronicMail>jmoody@crisps.co.uk</tns:ElectronicMail>
+    </tns:AccountsContact>
+    <tns:SalesContact>
+      <tns:Name>Herbert Armstrong</tns:Name>
+      <tns:Telephone>01908 500216</tns:Telephone>
+      <tns:Telefax>01908 500217</tns:Telefax>
+      <tns:ElectronicMail>harmstrong@crisps.co.uk</tns:ElectronicMail>
+    </tns:SalesContact>
+    <tns:OrderContact>
+      <tns:Name>Jessica Adams</tns:Name>
+      <tns:Telephone>01908 500218</tns:Telephone>
+      <tns:Telefax>01908 500219</tns:Telefax>
+      <tns:ElectronicMail>jadams@crisps.co.uk</tns:ElectronicMail>
+    </tns:OrderContact>
+  </tns:SupplierParty>
+  <tns:RejectionNote>N/A</tns:RejectionNote>
+  <tns:Language>en</tns:Language>
+  <tns:Currency>GBP</tns:Currency>
+  <tns:DeliveredItem>
+    <tns:LineItemID>5E03446B-DC6E-439F-82D1-7CCAC7F4E3B3</tns:LineItemID>
+    <tns:Quantity>
+      <tns:TotalQuantity>1000</tns:TotalQuantity>
+      <tns:Unit>kg</tns:Unit>
+    </tns:Quantity>
+    <tns:Description>Packaging materials</tns:Description>
+    <tns:PartialDeliveryIndicator>true</tns:PartialDeliveryIndicator>
+    <tns:BackOrderIndicator>true</tns:BackOrderIndicator>
+  </tns:DeliveredItem>
+</tns:OrderResponse>
