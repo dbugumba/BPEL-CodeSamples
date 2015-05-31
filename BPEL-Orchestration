@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ext="http://www.activebpel.org/2006/09/bpel/extension/query_handling" xmlns:ns1="http://t320.open.ac.uk/WSDL/bpelStockCheck/" xmlns:ns2="http://t320.open.ac.uk/WSDL/CredentialsWS/" xmlns:ns3="http://t320.open.ac.uk/WSDL/CheckStockWS/" xmlns:ns4="http://t320.open.ac.uk/WSDL/OrderStockWS/" xmlns:ns5="http://t320.open.ac.uk/WSDL/ProcessLogWS/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://t320.open.ac.uk/Schema/StockCheckMessages" expressionLanguage="urn:active-endpoints:expression-language:xquery1.0" ext:createTargetXPath="yes" name="bpelStage1StockCheck" suppressJoinFailure="yes" targetNamespace="http://t320.open.ac.uk/dpb285/BPEL/bpelStage1StockCheck">
+   <bpel:extensions>
+      <bpel:extension mustUnderstand="yes" namespace="http://www.activebpel.org/2006/09/bpel/extension/query_handling"/>
+   </bpel:extensions>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="../wsdl/bpelStockCheck.wsdl" namespace="http://t320.open.ac.uk/WSDL/bpelStockCheck/"/>
+   <bpel:import importType="http://www.w3.org/2001/XMLSchema" location="../schema/StockCheckMessages.xsd" namespace="http://t320.open.ac.uk/Schema/StockCheckMessages"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="../wsdl/CredentialsWS.wsdl" namespace="http://t320.open.ac.uk/WSDL/CredentialsWS/"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="../wsdl/CheckStockWS.wsdl" namespace="http://t320.open.ac.uk/WSDL/CheckStockWS/"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="../wsdl/OrderStockWS.wsdl" namespace="http://t320.open.ac.uk/WSDL/OrderStockWS/"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/" location="../wsdl/ProcessLogWS.wsdl" namespace="http://t320.open.ac.uk/WSDL/ProcessLogWS/"/>
+   <bpel:partnerLinks>
+      <bpel:partnerLink myRole="stockCheckServiceProvider" name="StockCheckPL" partnerLinkType="ns1:StockCheckPLT"/>
+      <bpel:partnerLink name="CredentialsWSPL" partnerLinkType="ns2:CredentialsWSPLT" partnerRole="credentialsCheckServiceProvider"/>
+      <bpel:partnerLink name="CheckStockPL" partnerLinkType="ns3:CheckStockPLT" partnerRole="checkStockServiceProvider"/>
+      <bpel:partnerLink name="OrderStockWSPL" partnerLinkType="ns4:OrderStockWSPLT" partnerRole="orderStockServiceProvider"/>
+      <bpel:partnerLink name="ProcessLogWSPL" partnerLinkType="ns5:ProcessLogWSPLT" partnerRole="processLogServiceProvider"/>
+   </bpel:partnerLinks>
+   <bpel:variables>
+      <bpel:variable element="xsd1:StockCheckRequest" name="StockCheckRequest"/>
+      <bpel:variable element="xsd1:StockCheckResponse" name="StockCheckResponse"/>
+      <bpel:variable element="xsd1:CredentialsWSRequest" name="CredentialsWSRequest"/>
+      <bpel:variable element="xsd1:CredentialsWSResponse" name="CredentialsWSResponse"/>
+      <bpel:variable element="xsd1:CheckStockWSRequest" name="CheckStockWSRequest"/>
+      <bpel:variable element="xsd1:CheckStockWSResponse" name="CheckStockWSResponse"/>
+      <bpel:variable element="xsd1:OrderStockWSRequest" name="OrderStockWSRequest"/>
+      <bpel:variable element="xsd1:OrderStockWSResponse" name="OrderStockWSResponse"/>
+      <bpel:variable element="xsd1:ProcessLogRequest" name="ProcessLogRequest"/>
+   </bpel:variables>
+   <bpel:flow>
+      <bpel:links>
+         <bpel:link name="L1"/>
+         <bpel:link name="L2"/>
+         <bpel:link name="L10"/>
+         <bpel:link name="L6"/>
+         <bpel:link name="L13"/>
+         <bpel:link name="L8"/>
+      </bpel:links>
+      <bpel:receive createInstance="yes" name="StockCheckRequest" operation="StockCheckOp" partnerLink="StockCheckPL" variable="StockCheckRequest">
+         <bpel:sources>
+            <bpel:source linkName="L1"/>
+         </bpel:sources>
+      </bpel:receive>
+      <bpel:reply name="StockCheckResponse" operation="StockCheckOp" partnerLink="StockCheckPL" variable="StockCheckResponse">
+         <bpel:targets>
+            <bpel:target linkName="L2"/>
+         </bpel:targets>
+      </bpel:reply>
+      <bpel:assign name="CreateStockLevelResponse">
+         <bpel:targets>
+            <bpel:target linkName="L13"/>
+            <bpel:target linkName="L8"/>
+         </bpel:targets>
+         <bpel:sources>
+            <bpel:source linkName="L2"/>
+         </bpel:sources>
+         <bpel:copy>
+            <bpel:from>
+               <bpel:literal>
+                  <xsd1:StockCheckResponse>
+   <xsd1:CatalogueItem>
+      <xsd1:ItemCode>234-123456</xsd1:ItemCode>
+      <xsd1:SupplierCode>SC-234567</xsd1:SupplierCode>
+   </xsd1:CatalogueItem>
+   <xsd1:CurrentStockLevel>0</xsd1:CurrentStockLevel>
+   <xsd1:OrderRequestedStatus>True</xsd1:OrderRequestedStatus>
+</xsd1:StockCheckResponse>
+               </bpel:literal>
+            </bpel:from>
+            <bpel:to variable="StockCheckResponse"/>
+         </bpel:copy>
+      </bpel:assign>
+      <bpel:scope name="VerifyCredentials_Scope">
+         <bpel:targets>
+            <bpel:target linkName="L1"/>
+         </bpel:targets>
+         <bpel:flow>
+            <bpel:links>
+               <bpel:link name="L3"/>
+               <bpel:link name="L11"/>
+               <bpel:link name="L4"/>
+               <bpel:link name="L12"/>
+               <bpel:link name="L9"/>
+            </bpel:links>
+            <bpel:assign name="TestCredentials">
+               <bpel:sources>
+                  <bpel:source linkName="L3"/>
+               </bpel:sources>
+               <bpel:copy>
+                  <bpel:from variable="StockCheckRequest">
+                     <bpel:query>xsd1:Credentials</bpel:query>
+                  </bpel:from>
+                  <bpel:to variable="CredentialsWSRequest">
+                     <bpel:query>xsd1:Credentials</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke inputVariable="CredentialsWSRequest" name="CredentialsWS" operation="CredentialsWSOp" outputVariable="CredentialsWSResponse" partnerLink="CredentialsWSPL">
+               <bpel:targets>
+                  <bpel:target linkName="L3"/>
+               </bpel:targets>
+               <bpel:sources>
+                  <bpel:source linkName="L11">
+                     <bpel:transitionCondition>$CredentialsWSResponse/xsd1:CredentialsStatus = 'False'</bpel:transitionCondition>
+                  </bpel:source>
+                  <bpel:source linkName="L4">
+                     <bpel:transitionCondition>$CredentialsWSResponse/xsd1:CredentialsStatus = 'True'</bpel:transitionCondition>
+                  </bpel:source>
+               </bpel:sources>
+            </bpel:invoke>
+            <bpel:reply name="CredentialsFailureResponse" operation="StockCheckOp" partnerLink="StockCheckPL" variable="StockCheckResponse">
+               <bpel:targets>
+                  <bpel:target linkName="L12"/>
+               </bpel:targets>
+            </bpel:reply>
+            <bpel:assign name="CreateCredentialsFailureMessage">
+               <bpel:targets>
+                  <bpel:target linkName="L11"/>
+               </bpel:targets>
+               <bpel:sources>
+                  <bpel:source linkName="L12"/>
+               </bpel:sources>
+               <bpel:copy>
+                  <bpel:from>
+                     <bpel:literal>
+                        <xsd1:StockCheckResponse>
+   <xsd1:CatalogueItem>
+      <xsd1:ItemCode>234-123456</xsd1:ItemCode>
+      <xsd1:SupplierCode>SC-234567</xsd1:SupplierCode>
+   </xsd1:CatalogueItem>
+   <xsd1:CurrentStockLevel>0</xsd1:CurrentStockLevel>
+   <xsd1:OrderRequestedStatus>True</xsd1:OrderRequestedStatus>
+</xsd1:StockCheckResponse>
+                     </bpel:literal>
+                  </bpel:from>
+                  <bpel:to variable="StockCheckResponse"/>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke inputVariable="ProcessLogRequest" name="LogCredentialsSuccess" operation="ProcessLogWSOp" partnerLink="ProcessLogWSPL">
+               <bpel:targets>
+                  <bpel:target linkName="L9"/>
+               </bpel:targets>
+               <bpel:sources>
+                  <bpel:source linkName="L10"/>
+               </bpel:sources>
+            </bpel:invoke>
+            <bpel:assign name="CreateCredentialsSuccessMessage">
+               <bpel:targets>
+                  <bpel:target linkName="L4"/>
+               </bpel:targets>
+               <bpel:sources>
+                  <bpel:source linkName="L9"/>
+               </bpel:sources>
+               <bpel:copy>
+                  <bpel:from>
+                     <bpel:literal>
+                        <xsd1:ProcessLogRequest>
+   <xsd1:ProcessID>string</xsd1:ProcessID>
+   <xsd1:TimeStamp>2012-08-30T20:37:24.541Z</xsd1:TimeStamp>
+   <xsd1:Message>string</xsd1:Message>
+</xsd1:ProcessLogRequest>
+                     </bpel:literal>
+                  </bpel:from>
+                  <bpel:to variable="ProcessLogRequest"/>
+               </bpel:copy>
+            </bpel:assign>
+         </bpel:flow>
+      </bpel:scope>
+      <bpel:scope name="CheckStock_Scope">
+         <bpel:targets>
+            <bpel:target linkName="L10"/>
+         </bpel:targets>
+         <bpel:sources>
+            <bpel:source linkName="L6">
+               <bpel:transitionCondition>number($CheckStockWSResponse/xsd1:AvailableStock) &lt; number( $CheckStockWSResponse/xsd1:ReorderLevel)</bpel:transitionCondition>
+            </bpel:source>
+            <bpel:source linkName="L13">
+               <bpel:transitionCondition>number($CheckStockWSResponse/xsd1:AvailableStock) &gt;= number($CheckStockWSResponse/xsd1:ReorderLevel)</bpel:transitionCondition>
+            </bpel:source>
+         </bpel:sources>
+         <bpel:flow>
+            <bpel:links>
+               <bpel:link name="L5"/>
+            </bpel:links>
+            <bpel:assign name="GetCatalogueItemStockLevel">
+               <bpel:sources>
+                  <bpel:source linkName="L5"/>
+               </bpel:sources>
+               <bpel:copy>
+                  <bpel:from variable="StockCheckRequest">
+                     <bpel:query>xsd1:CatalogueItem</bpel:query>
+                  </bpel:from>
+                  <bpel:to variable="CheckStockWSRequest">
+                     <bpel:query>xsd1:CatalogueItem</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke inputVariable="CheckStockWSRequest" name="CheckStockWS" operation="CheckStockOp" outputVariable="CheckStockWSResponse" partnerLink="CheckStockPL">
+               <bpel:targets>
+                  <bpel:target linkName="L5"/>
+               </bpel:targets>
+            </bpel:invoke>
+         </bpel:flow>
+      </bpel:scope>
+      <bpel:scope name="OrderStock_Scope">
+         <bpel:targets>
+            <bpel:target linkName="L6"/>
+         </bpel:targets>
+         <bpel:sources>
+            <bpel:source linkName="L8"/>
+         </bpel:sources>
+         <bpel:flow>
+            <bpel:links>
+               <bpel:link name="L7"/>
+            </bpel:links>
+            <bpel:assign name="OrderNewStock">
+               <bpel:sources>
+                  <bpel:source linkName="L7"/>
+               </bpel:sources>
+               <bpel:copy>
+                  <bpel:from variable="StockCheckRequest">
+                     <bpel:query>xsd1:CatalogueItem/xsd1:ItemCode</bpel:query>
+                  </bpel:from>
+                  <bpel:to variable="OrderStockWSRequest">
+                     <bpel:query>xsd1:Item/xsd1:ItemCode</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from variable="StockCheckRequest">
+                     <bpel:query>xsd1:CatalogueItem/xsd1:SupplierCode</bpel:query>
+                  </bpel:from>
+                  <bpel:to variable="OrderStockWSRequest">
+                     <bpel:query>xsd1:Item/xsd1:SupplierCode</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from variable="CheckStockWSResponse">
+                     <bpel:query>xsd1:ReorderLevel</bpel:query>
+                  </bpel:from>
+                  <bpel:to variable="OrderStockWSRequest">
+                     <bpel:query>xsd1:Quantity</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke inputVariable="OrderStockWSRequest" name="OrderStockWS" operation="OrderStockWSOp" outputVariable="OrderStockWSResponse" partnerLink="OrderStockWSPL">
+               <bpel:targets>
+                  <bpel:target linkName="L7"/>
+               </bpel:targets>
+            </bpel:invoke>
+         </bpel:flow>
+      </bpel:scope>
+   </bpel:flow>
+</bpel:process>
