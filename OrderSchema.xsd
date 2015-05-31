@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.open.ac.uk/dpb285/Schema/OrderDocuments" 
+    xmlns:tns="http://www.open.ac.uk/dpb285/Schema/OrderDocuments" 
+    elementFormDefault="qualified">
+    
+    <element name="Order" type="tns:OrderType"></element>
+        
+    <complexType name="OrderType">
+        <sequence>
+            <element name="OrderReferenceNumber" maxOccurs="1"
+                minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="IssuedDate" type="date" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="BuyerParty" type="tns:PartyType"
+                maxOccurs="1" minOccurs="1">
+            </element>
+            <element name="SupplierParty" type="tns:PartyType"
+                maxOccurs="1" minOccurs="1">
+            </element>
+            <element name="ContractReference" maxOccurs="1"
+                minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="BillToAddress" type="tns:AddressType"
+                maxOccurs="1" minOccurs="0">
+            </element>
+            <element name="Delivery" type="tns:DeliveryType" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="Language" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="zh"></enumeration>
+                        <enumeration value="nl"></enumeration>
+                        <enumeration value="en"></enumeration>
+                        <enumeration value="fr"></enumeration>
+                        <enumeration value="de"></enumeration>
+                        <enumeration value="ja"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Currency" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="CNY"></enumeration>
+                        <enumeration value="EUR"></enumeration>
+                        <enumeration value="JPY"></enumeration>
+                        <enumeration value="GBP"></enumeration>
+                        <enumeration value="USD"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="OrderItem" type="tns:OrderItemType"
+                maxOccurs="unbounded" minOccurs="1">
+            </element>
+        </sequence>
+
+    </complexType>
+    
+    <element name="OrderResponse" type="tns:OrderResponseType"></element>
+
+    <complexType name="OrderResponseType">
+        <sequence>
+            <element name="SalesReferenceNumber" maxOccurs="1"
+                minOccurs="1">
+                <annotation>
+                    <documentation>This regular expression matches the 'sample' transaction identifier - a 12 hexadecimals long unique identifier as per the NES Profile 7 UUID Guideline. </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="OrderReferenceNumber" maxOccurs="1"
+                minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="IssuedDate" type="date" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="AcceptedIndicator" type="boolean"
+                maxOccurs="1" minOccurs="1">
+            </element>
+            <element name="BuyerParty" type="tns:PartyType"
+                maxOccurs="1" minOccurs="1">
+            </element>
+            <element name="SupplierParty" type="tns:PartyType"
+                maxOccurs="1" minOccurs="1">
+            </element>
+            <element name="RejectionNote" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="Language" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="zh"></enumeration>
+                        <enumeration value="nl"></enumeration>
+                        <enumeration value="en"></enumeration>
+                        <enumeration value="fr"></enumeration>
+                        <enumeration value="de"></enumeration>
+                        <enumeration value="ja"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Currency" maxOccurs="1" minOccurs="1">
+                <annotation>
+                    <documentation>Each of the five currencies is specified by enumerating them into their respective alphabetic code.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="CNY"></enumeration>
+                        <enumeration value="EUR"></enumeration>
+                        <enumeration value="JPY"></enumeration>
+                        <enumeration value="GBP"></enumeration>
+                        <enumeration value="USD"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DeliveredItem" type="tns:DeliveredItemType"
+                maxOccurs="unbounded" minOccurs="1">
+                <annotation>
+                    <documentation>The recurring DeliveredItem element's number of times is controlled by the minOccurs and maxOccurs attributes, which here are 1 and 'unbounded' respectively, to indicate that there is no limit.</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+
+    
+    <element name="OrderItem" type="tns:OrderItemType"></element>
+
+    <complexType name="OrderItemType">
+        <sequence>
+            <element name="PartNumber" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Quantity" type="tns:QuantityType" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="Description" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="PartialDeliveryIndicator" type="boolean"
+                maxOccurs="1" minOccurs="0">
+            </element>
+            <element name="BackOrderAllowedIndicator" type="boolean"
+                maxOccurs="1" minOccurs="0">
+            </element>
+        </sequence>
+    </complexType>
+
+    <complexType name="QuantityType">
+        <sequence>
+            <element name="TotalQuantity" type="int"></element>
+            <element name="Unit">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="kg"></enumeration>
+                        <enumeration value="g"></enumeration>
+                        <enumeration value="m"></enumeration>
+                        <enumeration value="cm"></enumeration>
+                        <enumeration value="mm"></enumeration>
+                        <enumeration value="ampere"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    
+    <element name="DeliveredItem" type="tns:DeliveredItemType"></element>
+
+    <complexType name="DeliveredItemType">
+        <sequence>
+            <element name="LineItemID" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Quantity" type="tns:QuantityType" maxOccurs="1" minOccurs="1"></element>
+            <element name="Description" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="PartialDeliveryIndicator" type="boolean" maxOccurs="1" minOccurs="0"></element>
+            <element name="BackOrderIndicator" type="boolean" maxOccurs="1" minOccurs="0"></element>
+        </sequence>
+    </complexType>
+    
+    <element name="Party" type="tns:PartyType"></element>
+
+    <complexType name="PartyType">
+        <sequence>
+            <element name="CompanyID" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="\d{13}"></pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+
+            <element name="RegisteredName" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="Address" type="tns:AddressType" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="PurchaseContact" type="tns:ContactType" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="AccountsContact" type="tns:ContactType" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="SalesContact" type="tns:ContactType" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="OrderContact" type="tns:ContactType" maxOccurs="1" minOccurs="0"></element>
+        </sequence>
+    </complexType>
+    
+    <element name="Address" type="tns:AddressType"></element>
+
+    <complexType name="AddressType">
+        <sequence>
+            <element name="BuildingName" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="BuildingNumber" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="StreetName" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="SubDivision" type="string" maxOccurs="1"
+                minOccurs="0">
+            </element>
+            <element name="CityName" type="string" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="PostalCode" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern
+                            value="[A-Z]{2}[0-9]{1,2} [0-9][A-Z]{2}">
+                        </pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Country" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="CN"></enumeration>
+                        <enumeration value="DE"></enumeration>
+                        <enumeration value="JP"></enumeration>
+                        <enumeration value="NL"></enumeration>
+                        <enumeration value="GB"></enumeration>
+                        <enumeration value="US"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    
+    <element name="Contact" type="tns:ContactType">
+        <annotation>
+            <documentation>Reused in other entities such as Order, Party and OrderResponse as referred to in the discussion.  </documentation>
+        </annotation></element>
+
+    <complexType name="ContactType">
+        <sequence>
+            <element name="Name" type="string" maxOccurs="1"
+                minOccurs="1">
+            </element>
+            <element name="Telephone" maxOccurs="1" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="\d{5} \d{6}"></pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Telefax" maxOccurs="1" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="\d{5} \d{6}"></pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ElectronicMail" maxOccurs="1"
+                minOccurs="1" type="string">
+            </element>
+        </sequence>
+    </complexType>
+
+
+    <complexType name="DeliveryType">
+        <sequence>
+            <element name="DeliveryAddress" type="tns:AddressType"></element>
+            <element name="EarliestDeliveryDate" type="date"></element>
+            <element name="LatestDeliveryDate" type="date"></element>
+            <element name="DeliveryContactableName" type="string"></element>
+        </sequence>
+    </complexType>
+</schema>
